@@ -18,6 +18,18 @@
                 </small>
             </p>
 
+            {% if form.erros %}
+                {% for field in form %}
+                    {% if field.erros %}
+                        {% for error in field.erros %}
+                            <div class="alert alert-warning" role="alert">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
             <form method="post" enctype="multipart/form-data">
                 <div class="form-row">
                     {% csrf_token %}
