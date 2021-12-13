@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import fields
 from visitantes.models import Visitante
 
 class visitanteForm(forms.ModelForm):
@@ -23,3 +24,17 @@ class visitanteForm(forms.ModelForm):
                     "required": "Por favor, informe o setor a ser visitado"
                 }
             }
+
+class AutorizaVisitanteForm(forms.ModelForm):
+    colaborador_responsavel = forms.CharField(required=True)
+
+    class Meta:
+        model = Visitante
+        fields = [
+            "colaborador_responsavel"
+        ]
+        error_messages = {
+            "colaborador_responsavel": {
+            "required": "Por favor informe a pessoa ou local que destina ir"
+            }
+        }
