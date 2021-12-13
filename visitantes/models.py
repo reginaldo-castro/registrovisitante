@@ -13,6 +13,27 @@ class Visitante(models.Model):
     colaborador_responsavel = models.CharField(verbose_name="Nome do colaborador responsável por autorizar a entrada", max_length=194, blank=True)
     registrado_por = models.ForeignKey("porteiros.Porteiro", verbose_name="Porteiro responsável pelo registro", on_delete=models.PROTECT)
 
+
+    def get_horario_saida(self):
+        if self.horario_saida:
+            return self.horario_saida
+        return "Horário de saída não registrado"
+
+    def get_horario_autorizacao(self):
+        if self.horario_autorizacao:
+            return self.horario_autorizacao
+        return "Aguardando confirmação"
+
+    def get_colaborador_responsavel(self):
+        if self.colaborador_responsavel:
+            return self.colaborador_responsavel
+        return "Aguardando confirmação"
+
+    def get_placa_veiculo(self):
+        if self.placa_veiculo:
+            return self.placa_veiculo
+        return "Veículo não registrado"
+
     class Meta:
         verbose_name = "Visitante" 
         verbose_name_plural = "Visitantes"
