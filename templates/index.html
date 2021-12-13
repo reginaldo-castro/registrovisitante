@@ -3,7 +3,22 @@
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">{{ nome_pagina }}</h1>
+        <a href="{% url 'registrar_visitante' %}" class="btn btn-primary btn-icon-" >
+            <span class="text">Registrar visitante</span>
+                <span class="icon text-white-50">
+                    <i class="fas fa-user-plus"></i>
+                </span>
+        </a>
     </div>
+    
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{message}}
+            </div>
+        {% endfor %}
+    {% endif%}
 
     <div class="row">
         <div class="col-xl-3 col-md-6 mb-4">
@@ -28,7 +43,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Visitantes no condomínio</div>
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Visitantes na empresa</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
                         </div>
                         
@@ -96,10 +111,10 @@
                             <td>{{ visitante.nome_completo }}</td>
                             <td>{{ visitante.cpf }}</td>
                             <td>{{ visitante.horario_chegada }}</td>
-                            <td>{{ visitante.horario_autorizacao }}</td>
-                            <td>{{ visitante.colaborador_responsavel }}</td>
+                            <td>{{ visitante.get_horario_autorizacao }}</td>
+                            <td>{{ visitante.get_colaborador_responsavel }}</td>
                             <td>
-                                <a href="#">
+                                <a href="{% url 'informacoes_visitante' visitante.id %}">
                                     Ver informações
                                 </a>
                             </td>
