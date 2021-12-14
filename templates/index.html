@@ -27,7 +27,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Visitantes aguardando autorização</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ visitante_aguardando }}</div>
                         </div>
                         
                         <div class="col-auto">
@@ -44,7 +44,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Visitantes na empresa</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{visitante_em_visitas }}</div>
                         </div>
                         
                         <div class="col-auto">
@@ -61,7 +61,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Visitas finalizadas</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{visitante_finalizado}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-user-check fa-2x text-gray-300"></i>
@@ -77,7 +77,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Visitantes registrados no mês atual</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{visitante_mes}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-users fa-2x text-gray-300"></i>
@@ -100,6 +100,7 @@
                         <th>Nome completo</th>
                         <th>CPF</th>
                         <th>Horário de chegada</th>
+                        <th>Status</th>
                         <th>Horário da autorização</th>
                         <th>Autorizado por</th>
                         <th>Mais informações</th>
@@ -109,8 +110,9 @@
                         {% for visitante in todos_visitantes %}
                         <tr>
                             <td>{{ visitante.nome_completo }}</td>
-                            <td>{{ visitante.cpf }}</td>
+                            <td>{{ visitante.get_cpf }}</td>
                             <td>{{ visitante.horario_chegada }}</td>
+                            <td>{{ visitante.get_status_display }}</td>
                             <td>{{ visitante.get_horario_autorizacao }}</td>
                             <td>{{ visitante.get_colaborador_responsavel }}</td>
                             <td>
