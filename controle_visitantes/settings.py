@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,6 +27,10 @@ SECRET_KEY = '((+@ogn7sl@9@%1)@b6z46l930d8327esu=&uw9s6evwvn_ldb'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+sys.path.append(
+    os.path.join(BASE_DIR, "apps")
+)
 
 
 # Application definition
@@ -47,6 +52,7 @@ INSTALLED_APPS += [
     "usuarios",
     "porteiros",
     "visitantes",
+    "dashboard",
 ]
 
 # Usando a classe Usuario que criamos
@@ -135,3 +141,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
+
+LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "index"
