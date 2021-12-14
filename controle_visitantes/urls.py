@@ -15,13 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from dashboard.views import index
 import usuarios.views
-import visitantes.views 
+import visitantes.views
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", usuarios.views.index, name="index"),
+    path('login/', auth_views.LoginView.as_view(template_name="login.html"), name="login"),
+    path('logout/', auth_views.LogoutView.as_view(template_name="logout.html"), name="logout"),
+    path("", index, name="index"),
     path("registrar-visitante/", visitantes.views.registrar_visitante, name="registrar_visitante"),
     path("visitante/<int:id>/", visitantes.views.informacoes_visistantes, name="informacoes_visitante"),
+    path('visitantex/<int:id>/finalizar-visita', visitantes.views.finalizar_visita, name='finalizar_visita'),
 ]
